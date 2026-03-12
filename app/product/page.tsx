@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Cta from "../components/Cta";
 import Divider from "../components/Divider";
+import Faq from "../components/Faq";
 import Features from "../components/Features";
 import Footer from "../components/Footer";
 import Product from "../components/Product";
@@ -63,6 +64,7 @@ export default function ProductPage() {
       <Divider variant="dark" />
       <Testimonials />
       <Divider variant="dark" />
+      <Faq />
       <Cta />
       <Divider />
       <Footer />
