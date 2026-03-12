@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import ForWho from "./components/ForWho";
 import Hero from "./components/Hero";
 import Logos from "./components/Logos";
+import Statement from "./components/Statement";
 import Platform from "./components/Platform";
 import Testimonials from "./components/Testimonials";
 import Visuals from "./components/Visuals";
@@ -17,6 +18,8 @@ export default function Home() {
       <Visuals />
       <Divider />
       <Logos />
+      <Divider />
+      <Statement />
       <Divider />
       <Platform />
       <Divider variant="dark" />

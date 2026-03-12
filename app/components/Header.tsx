@@ -50,7 +50,7 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="ml-auto hidden items-center gap-1 md:flex">
-            <ButtonOutline href="#">Sign in</ButtonOutline>
+            <ButtonOutline href="/contact">Book a demo</ButtonOutline>
             <ButtonGradient href="/contact">
               Talk to us <i className="ri-arrow-right-line" />
             </ButtonGradient>
@@ -91,7 +91,7 @@ export default function Header() {
               })}
             </nav>
             <div className="mt-3 flex flex-col gap-2 border-t border-slate-200 pt-3">
-              <ButtonOutline href="#">Sign in</ButtonOutline>
+              <ButtonOutline href="/contact">Book a demo</ButtonOutline>
               <ButtonGradient href="/contact">
                 Talk to us <i className="ri-arrow-right-line" />
               </ButtonGradient>
