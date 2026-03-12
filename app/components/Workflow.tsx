@@ -123,31 +123,32 @@ export default function Workflow() {
             <div className="relative px-6 py-16 md:px-10 md:py-24">
               {/* Mobile: vertical layout */}
               <div className="block md:hidden">
-                <div className="relative flex flex-col items-center gap-6">
+                <div className="relative flex flex-col items-start gap-4" style={{ paddingLeft: 22 }}>
                   {/* Background line */}
-                  <div className="absolute left-1/2 w-[1px] -translate-x-1/2 border-l border-dashed border-slate-600" style={{ top: 22, bottom: 22 }} />
+                  <div className="absolute left-[21.5px] w-[1px] border-l border-dashed border-slate-600" style={{ top: 22, bottom: 22 }} />
 
                   {/* Progress line */}
                   <div
                     ref={progressMobileRef}
-                    className="absolute left-1/2 w-[1px] -translate-x-1/2 bg-slate-200"
+                    className="absolute left-[21.5px] w-[1px] bg-slate-200"
                     style={{ top: 22, height: 0, transition: "none", maxHeight: "calc(100% - 44px)" }}
                   />
 
                   {steps.map((step, i) => (
                     <div
                       key={i}
-                      className="relative z-10 flex flex-col items-center gap-2"
+                      className="relative z-10 flex items-center gap-3"
                     >
                       <div
                         ref={(el) => { mobileIconsRef.current[i] = el; }}
-                        className="flex h-11 w-11 items-center justify-center border border-slate-600 bg-slate-800 text-slate-400 transition-colors duration-300"
+                        className="flex h-11 w-11 shrink-0 items-center justify-center border border-slate-600 bg-slate-800 text-slate-400 transition-colors duration-300"
+                        style={{ marginLeft: -22 }}
                       >
                         <i className={`${step.icon} text-lg`} />
                       </div>
                       <span
                         ref={(el) => { mobileLabelsRef.current[i] = el; }}
-                        className="text-center text-[10px] leading-tight text-slate-500 transition-colors duration-300"
+                        className="text-xs text-slate-500 transition-colors duration-300"
                       >
                         {step.label}
                       </span>

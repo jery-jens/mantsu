@@ -198,10 +198,10 @@ export default function Features() {
                 production at scale.
               </p>
             </div>
-            <div className="flex items-center gap-4 px-6 pb-6 md:px-8 md:pb-0">
-              <Image src="/badge-soc-1.svg" alt="AICPA SOC" width={100} height={100} />
-              <Image src="/badge-soc-2.svg" alt="AICPA SOC" width={100} height={100} />
-              <Image src="/badge-soc-2.svg" alt="AICPA SOC" width={100} height={100} />
+            <div className="flex items-center gap-3 px-6 pb-6 md:gap-4 md:px-8 md:pb-0">
+              <Image src="/badge-soc-1.svg" alt="AICPA SOC" width={100} height={100} className="h-16 w-16 md:h-[100px] md:w-[100px]" />
+              <Image src="/badge-soc-2.svg" alt="AICPA SOC" width={100} height={100} className="h-16 w-16 md:h-[100px] md:w-[100px]" />
+              <Image src="/badge-soc-2.svg" alt="AICPA SOC" width={100} height={100} className="h-16 w-16 md:h-[100px] md:w-[100px]" />
             </div>
           </div>
         </div>

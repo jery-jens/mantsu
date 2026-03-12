@@ -119,7 +119,6 @@ export default function Testimonials() {
   const mobileQuoteRef = useRef<HTMLDivElement>(null);
   const desktopQuoteRef = useRef<HTMLDivElement>(null);
   const desktopLeftRef = useRef<HTMLDivElement>(null);
-  const mobileVideoRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
   const prevTypeRef = useRef(testimonials[0].type);
 
@@ -138,7 +137,7 @@ export default function Testimonials() {
       const targets = [
         mobileQuoteRef.current?.children[0],
         desktopQuoteRef.current?.children[0],
-        ...(typeChanges ? [desktopLeftRef.current, mobileVideoRef.current] : []),
+        ...(typeChanges ? [desktopLeftRef.current] : []),
       ].filter(Boolean) as HTMLElement[];
 
       const tl = gsap.timeline({
@@ -168,7 +167,7 @@ export default function Testimonials() {
     const targets = [
       mobileQuoteRef.current?.children[0],
       desktopQuoteRef.current?.children[0],
-      ...(typeChanged ? [desktopLeftRef.current, mobileVideoRef.current] : []),
+      ...(typeChanged ? [desktopLeftRef.current] : []),
     ].filter(Boolean) as HTMLElement[];
 
     targets.forEach((el) => {
@@ -192,21 +191,18 @@ export default function Testimonials() {
     <div className="border-b border-slate-600 bg-slate-800">
       <Wrapper className="border-slate-600">
         {/* Mobile: stacked layout */}
-        <div className="flex flex-col md:hidden">
-          {/* Video thumbnail on mobile (shown above quote when video type) */}
-          {isVideo && (
-            <div
-              ref={mobileVideoRef}
-              className="relative aspect-video w-full overflow-hidden border-b border-slate-600"
-            >
-              <VideoPanel testimonial={current as VideoTestimonial} />
+        <div className="flex flex-col overflow-hidden md:hidden">
+          <div ref={mobileQuoteRef}>
+            <div>
+              {isVideo && (
+                <div className="relative aspect-video w-full border-b border-slate-600">
+                  <VideoPanel testimonial={current as VideoTestimonial} />
+                </div>
+              )}
+              <div className="relative h-[280px]">
+                <QuoteSlide testimonial={current} />
+              </div>
             </div>
-          )}
-          <div
-            ref={mobileQuoteRef}
-            className="relative h-[320px] overflow-hidden"
-          >
-            <QuoteSlide testimonial={current} />
           </div>
           <div className="flex items-center justify-center gap-2 border-t border-slate-600 py-4">
             {testimonials.map((_, i) => (

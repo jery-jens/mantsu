@@ -14,7 +14,7 @@ export default function Visuals() {
               className="object-cover"
             />
           </div>
-          <div className="flex-1 overflow-hidden border border-slate-200 bg-white">
+          <div className="flex-1 overflow-x-auto border border-slate-200 bg-white">
             <div className="flex items-center justify-between border-b border-slate-200 px-3 py-2">
               <div className="flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
@@ -28,7 +28,7 @@ export default function Visuals() {
                 <Image src="/mantsu-icon.svg" alt="Mantsu" width={16} height={16} />
               </div>
             </div>
-            <table className="w-full text-left">
+            <table className="w-full min-w-[480px] text-left">
               <thead>
                 <tr className="border-b border-slate-200">
                   <th className="px-4 py-2.5 text-xs font-normal text-slate-400">Plant</th>
