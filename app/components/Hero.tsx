@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
-import Image from "next/image";
 import ButtonGradient from "./ButtonGradient";
 import ButtonOutline from "./ButtonOutline";
 import Wrapper from "./Wrapper";
@@ -38,16 +37,8 @@ export default function Hero() {
   return (
     <div className="border-b border-slate-200 bg-slate-50">
       <Wrapper>
-        <section className="grid grid-cols-1 md:grid-cols-2">
-          <div className="relative hidden h-full min-h-[400px] overflow-hidden md:block">
-            <Image
-              src="/hero-image.jpg"
-              alt="Factory production environment"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="flex flex-col items-center justify-center px-4 py-10 text-center md:items-start md:px-12 md:py-16 md:text-left">
+        <section className="flex flex-col items-center px-4 py-10 md:px-8 md:py-16">
+          <div className="max-w-[440px] text-center md:max-w-[660px]">
             <h1
               ref={headingRef}
               className="invisible font-serif text-[32px] leading-none tracking-[-0.96px] text-slate-900 md:text-[48px] md:tracking-[-1.92px] [&_.hero-line]:overflow-hidden [&_.hero-line]:pb-2 [&_.hero-line]:-mb-2"
