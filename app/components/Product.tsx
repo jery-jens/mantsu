@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Wrapper from "./Wrapper";
 
 const items = [
@@ -53,8 +54,16 @@ export default function Product() {
               <span className="absolute left-4 top-4 font-mono text-[10px] text-slate-500">
                 {item.number}
               </span>
-              <div className="h-[160px] bg-slate-700 md:h-[207px]" />
-              <div className="bg-gradient-to-b from-slate-700 to-slate-800 px-6 pt-12 pb-6 md:px-8 md:pt-[73px] md:pb-8">
+              <div className="relative min-h-[160px] flex-1 overflow-hidden md:min-h-[207px]">
+                <Image
+                  src={`/visual-${i + 1}.png`}
+                  alt=""
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-800 to-transparent" />
+              </div>
+              <div className="px-6 pt-12 pb-6 md:px-8 md:pt-[73px] md:pb-8">
                 <h3 className="font-serif text-[20px] leading-none tracking-[-0.6px] text-slate-50">
                   {item.title}
                 </h3>

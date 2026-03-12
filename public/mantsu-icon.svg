@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Laag_1" data-name="Laag 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 285.63 291.08">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Naamloos_verloop_19);
+      }
+    </style>
+    <linearGradient id="Naamloos_verloop_19" data-name="Naamloos verloop 19" x1="25.73" y1="147.8" x2="259.9" y2="147.8" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c60c5b"/>
+      <stop offset="1" stop-color="#e7814f"/>
+    </linearGradient>
+  </defs>
+  <path class="cls-1" d="M133.73,17.85l-98.92,57.11c-5.62,3.25-9.08,9.24-9.08,15.73v114.22c0,6.49,3.46,12.49,9.08,15.73l98.92,57.11c5.62,3.25,12.55,3.25,18.17,0l98.92-57.11c5.62-3.25,9.08-9.24,9.08-15.73v-114.22c0-6.49-3.46-12.49-9.08-15.73l-98.92-57.11c-5.62-3.25-12.55-3.25-18.17,0ZM208.77,196.37l-56.87,32.84c-5.62,3.25-12.55,3.25-18.17,0l-56.87-32.84c-5.62-3.25-9.08-9.24-9.08-15.73v-65.67c0-6.49,3.46-12.49,9.08-15.73l56.87-32.84c5.62-3.25,12.55-3.25,18.17,0l56.87,32.84c5.62,3.25,9.08,9.24,9.08,15.73v65.67c0,6.49-3.46,12.49-9.08,15.73Z"/>
+</svg>
