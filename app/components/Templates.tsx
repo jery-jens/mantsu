@@ -124,15 +124,16 @@ export default function Templates() {
                     <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
                     <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
                   </div>
-                  <div className="relative h-[240px] bg-slate-50 md:h-[400px]">
-                    {tab.image && (
+                  <div className="relative h-[240px] overflow-hidden bg-slate-50 md:h-[400px]">
+                    {tab.image ? (
                       <Image
                         src={tab.image}
                         alt={tab.title}
-                        fill
-                        className="object-cover object-top"
+                        width={1600}
+                        height={1200}
+                        className="absolute right-0 bottom-0 w-[200%] max-w-none"
                       />
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </div>
