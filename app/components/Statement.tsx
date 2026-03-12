@@ -44,10 +44,10 @@ export default function Statement() {
   return (
     <div className="border-b border-slate-200 bg-slate-50">
       <Wrapper>
-        <div className="px-4 py-16 md:px-8 md:py-24">
+        <div className="px-4 py-20 md:px-8 md:py-36">
           <p
             ref={textRef}
-            className="invisible mx-auto max-w-[900px] text-center font-serif text-[28px] leading-[1.3] tracking-[-0.84px] text-slate-900 md:text-[44px] md:leading-[1.2] md:tracking-[-1.32px]"
+            className="invisible mx-auto max-w-[900px] text-center font-serif text-[22px] leading-[1.35] tracking-[-0.66px] text-slate-900 sm:text-[28px] sm:tracking-[-0.84px] md:text-[44px] md:leading-[1.2] md:tracking-[-1.32px]"
           >
             Factories still run on disconnected spreadsheets, outdated MES
             systems, and manual workarounds. It&apos;s time for software that

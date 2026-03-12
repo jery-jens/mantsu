@@ -1,16 +1,87 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ButtonGradient from "./ButtonGradient";
 import Wrapper from "./Wrapper";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const steps = [
-  { label: "Production planning", icon: "ri-file-list-3-line" },
+  { label: "Planning", icon: "ri-file-list-3-line" },
   { label: "Start order", icon: "ri-play-line" },
-  { label: "Quality check", icon: "ri-shield-check-line" },
+  { label: "Quality", icon: "ri-shield-check-line" },
   { label: "Assembly", icon: "ri-tools-line" },
   { label: "Packaging", icon: "ri-box-3-line" },
-  { label: "Order completion", icon: "ri-check-double-line" },
+  { label: "Completion", icon: "ri-check-double-line" },
 ];
 
 export default function Workflow() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const iconsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const labelsRef = useRef<(HTMLSpanElement | null)[]>([]);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const progress = progressRef.current;
+    if (!section || !progress) return;
+
+    const totalSteps = steps.length;
+
+    // Animate the progress line width based on scroll
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top 80%",
+      end: "top 40%",
+      scrub: 0.3,
+      onUpdate: (self) => {
+        const p = self.progress;
+        progress.style.width = `${p * 100}%`;
+
+        // Determine which step to highlight
+        const activeIndex = Math.min(
+          Math.floor(p * totalSteps),
+          totalSteps - 1
+        );
+
+        iconsRef.current.forEach((icon, i) => {
+          if (!icon) return;
+          const iconEl = icon.querySelector("i");
+          if (i <= activeIndex) {
+            icon.style.borderColor = "#e2e8f0";
+            icon.style.backgroundColor = "#1e293b";
+            if (iconEl) {
+              iconEl.style.backgroundImage = "linear-gradient(to bottom, #E8824F, #C70C5B)";
+              iconEl.style.webkitBackgroundClip = "text";
+              iconEl.style.webkitTextFillColor = "transparent";
+            }
+          } else {
+            icon.style.borderColor = "#475569";
+            icon.style.backgroundColor = "#1e293b";
+            if (iconEl) {
+              iconEl.style.backgroundImage = "none";
+              iconEl.style.webkitBackgroundClip = "unset";
+              iconEl.style.webkitTextFillColor = "#64748b";
+            }
+          }
+        });
+
+        labelsRef.current.forEach((label, i) => {
+          if (!label) return;
+          label.style.color = i <= activeIndex ? "#e2e8f0" : "#64748b";
+        });
+      },
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((t) => {
+        if (t.trigger === section) t.kill();
+      });
+    };
+  }, []);
+
   return (
     <div className="border-b border-slate-600 bg-slate-800">
       <Wrapper className="border-slate-600">
@@ -31,33 +102,58 @@ export default function Workflow() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-dashed border-slate-600 md:mt-16">
+        <div
+          ref={sectionRef}
+          className="mt-10 border-t border-dashed border-slate-600 md:mt-16"
+        >
           <div className="mx-4 border-x border-dashed border-slate-600 md:mx-12">
-            <div className="overflow-x-auto px-6 py-10 md:px-10 md:py-14">
+            <div className="relative overflow-x-auto px-6 py-16 md:px-10 md:py-24">
               <div className="min-w-[540px]">
                 {/* Flow */}
-                <div className="relative flex items-center justify-between">
-                  {/* Connecting line */}
-                  <div className="absolute inset-x-0 top-1/2 h-[1px] -translate-y-1/2 border-t border-dashed border-slate-600" />
+                <div className="relative flex items-start justify-between">
+                  {/* Background line */}
+                  <div className="absolute top-[21px] h-[1px] border-t border-dashed border-slate-600" style={{ left: 22, right: 22 }} />
+
+                  {/* Progress line */}
+                  <div
+                    ref={progressRef}
+                    className="absolute top-[21px] h-[1px] w-0 bg-slate-200"
+                    style={{ left: 22, transition: "none", maxWidth: "calc(100% - 44px)" }}
+                  />
 
                   {steps.map((step, i) => (
-                    <div key={i} className="relative z-10 flex flex-col items-center gap-2.5">
-                      <div className={`flex h-11 w-11 items-center justify-center rounded-none ${
-                        i === 0 || i === steps.length - 1
-                          ? "border border-slate-500 bg-slate-700 text-slate-300"
-                          : "border border-slate-600 bg-slate-800 text-slate-400"
-                      }`}>
+                    <div
+                      key={i}
+                      className="relative z-10 flex flex-col items-center gap-2.5"
+                    >
+                      <div
+                        ref={(el) => { iconsRef.current[i] = el; }}
+                        className="flex h-11 w-11 items-center justify-center border border-slate-600 bg-slate-800 text-slate-400 transition-colors duration-300"
+                      >
                         <i className={`${step.icon} text-lg`} />
                       </div>
-                      <span className="max-w-[72px] text-center text-[10px] leading-tight text-slate-500">{step.label}</span>
+                      <span
+                        ref={(el) => { labelsRef.current[i] = el; }}
+                        className="max-w-[72px] text-center text-[10px] leading-tight text-slate-500 transition-colors duration-300"
+                      >
+                        {step.label}
+                      </span>
                     </div>
                   ))}
                 </div>
 
                 {/* Mantsu bar */}
-                <div className="mt-6 flex items-center justify-center gap-2">
+                <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2">
                   <div className="h-[1px] w-6 bg-gradient-to-r from-transparent to-[#E8824F]" />
-                  <span className="flex items-center gap-1.5 text-[10px] font-normal uppercase tracking-widest text-slate-400">Connected by <img src="/mantsu-icon.svg" alt="" className="inline h-3 w-3" /> Mantsu</span>
+                  <span className="flex items-center gap-1.5 text-[10px] font-normal uppercase tracking-widest text-slate-400">
+                    Connected by{" "}
+                    <img
+                      src="/mantsu-icon.svg"
+                      alt=""
+                      className="inline h-3 w-3"
+                    />{" "}
+                    Mantsu
+                  </span>
                   <div className="h-[1px] w-6 bg-gradient-to-r from-[#C70C5B] to-transparent" />
                 </div>
               </div>
