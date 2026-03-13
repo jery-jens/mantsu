@@ -213,9 +213,9 @@ export default function Features() {
               key={i}
               className={`px-6 py-6 md:px-8 md:py-8 ${
                 i < 3 ? "md:border-r md:border-slate-600" : ""
-              } ${i % 2 === 0 ? "border-r border-slate-600 md:border-r-0" : ""} ${
+              } ${i % 2 === 0 ? "border-r border-slate-600" : ""} ${
                 i < 2 ? "border-b border-slate-600 md:border-b-0" : ""
-              } ${i < 3 ? "md:border-r" : ""}`}
+              }`}
             >
               <p className="font-serif text-[24px] leading-none tracking-[-0.72px] text-slate-50 md:text-[32px] md:tracking-[-0.96px]">
                 <CountUp num={stat.num} prefix={stat.prefix} suffix={stat.suffix} />
