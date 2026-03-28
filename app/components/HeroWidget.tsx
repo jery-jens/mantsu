@@ -104,11 +104,11 @@ export default function HeroWidget({ variant = "control-room" }: HeroWidgetProps
         </span>
       </div>
 
-      <table className="w-full min-w-[480px] text-left">
+      <table className="w-full text-left">
         <thead>
           <tr className="border-b border-slate-200">
-            {config.headers.map((h) => (
-              <th key={h} className="px-4 py-2.5 text-xs font-normal text-slate-400">{h}</th>
+            {config.headers.map((h, j) => (
+              <th key={h} className={`px-2 py-2.5 text-xs font-normal text-slate-400 md:px-4 ${j === 1 ? "hidden sm:table-cell" : ""}`}>{h}</th>
             ))}
           </tr>
         </thead>
@@ -123,14 +123,14 @@ export default function HeroWidget({ variant = "control-room" }: HeroWidgetProps
               {row.cells.map((cell, j) => (
                 <td
                   key={j}
-                  className={`px-4 py-2 ${
+                  className={`px-2 py-2 md:px-4 ${
                     j === 0 ? "text-sm font-normal text-slate-900" : "text-xs text-slate-500"
-                  } ${row.highlight === j ? "text-red-500" : ""}`}
+                  } ${j === 1 ? "hidden sm:table-cell" : ""} ${row.highlight === j ? "text-red-500" : ""}`}
                 >
                   {cell}
                 </td>
               ))}
-              <td className="px-4 py-2">
+              <td className="px-2 py-2 md:px-4">
                 <span
                   className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-normal transition-all duration-500 ${reasonStyles[badges[i].color]}`}
                 >

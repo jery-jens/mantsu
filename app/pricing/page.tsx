@@ -163,7 +163,7 @@ export default function PricingPage() {
                   </p>
                 </div>
               </div>
-              <div className="mt-8 flex flex-col gap-2">
+              <div className="mt-8 flex flex-col items-center gap-2">
                 <ButtonGradient href="/contact">
                   Talk to us <i className="ri-arrow-right-line" />
                 </ButtonGradient>

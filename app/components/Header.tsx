@@ -61,7 +61,7 @@ export default function Header() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="ml-auto flex h-8 w-8 items-center justify-center rounded-full text-slate-600 hover:bg-slate-100 md:hidden"
+            className="ml-auto flex h-10 w-10 items-center justify-center rounded-full text-slate-600 hover:bg-slate-100 md:hidden"
             aria-label="Toggle menu"
           >
             <i className={menuOpen ? "ri-close-line text-lg" : "ri-menu-line text-lg"} />

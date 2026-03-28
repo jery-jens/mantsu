@@ -2,13 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { SplitText } from "gsap/SplitText";
 import ButtonGradient from "./ButtonGradient";
 import ButtonOutline from "./ButtonOutline";
 import HeroWidget from "./HeroWidget";
 import Wrapper from "./Wrapper";
-
-gsap.registerPlugin(SplitText);
 
 const slides = [
   { label: "Control room", key: "control-room" },
@@ -17,7 +14,6 @@ const slides = [
 ];
 
 export default function Hero() {
-  const headingRef = useRef<HTMLHeadingElement>(null);
   const visualRef = useRef<HTMLDivElement>(null);
   const slideRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
@@ -42,32 +38,12 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!headingRef.current) return;
-
-    const split = SplitText.create(headingRef.current, {
-      type: "lines",
-      linesClass: "hero-line",
-    });
-
-    gsap.set(headingRef.current, { visibility: "visible" });
-
-    gsap.from(split.lines, {
-      yPercent: 100,
-      opacity: 0,
-      filter: "blur(8px)",
-      duration: 0.8,
-      ease: "power3.out",
-      stagger: 0.12,
-    });
-
     if (visualRef.current) {
       gsap.fromTo(visualRef.current,
         { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.5 }
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.3 }
       );
     }
-
-    return () => split.revert();
   }, []);
 
   // Position pill on mount
@@ -102,8 +78,7 @@ export default function Hero() {
           {/* Left: text */}
           <section className="flex flex-col justify-center px-6 py-10 md:px-12">
             <h1
-              ref={headingRef}
-              className="invisible font-serif text-[32px] leading-none tracking-[-0.96px] text-slate-900 md:text-[56px] md:tracking-[-2.24px] [&_.hero-line]:overflow-hidden [&_.hero-line]:pb-2 [&_.hero-line]:-mb-2"
+              className="font-serif text-[32px] leading-none tracking-[-0.96px] text-slate-900 md:text-[56px] md:tracking-[-2.24px]"
             >
               Production shouldn&apos;t run on <span className="text-gradient">spreadsheets</span> and guesswork.
             </h1>

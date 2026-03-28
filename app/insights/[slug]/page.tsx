@@ -203,10 +203,10 @@ export default async function InsightDetailPage({
 
       <div className="border-b border-slate-200 bg-slate-50">
         <Wrapper>
-          <div className="px-8 pt-8">
+          <div className="px-4 pt-4 md:px-8 md:pt-8">
             <div className="aspect-[16/9] w-full bg-slate-200" />
           </div>
-          <div className={`px-4 py-8 md:px-8 md:py-12 ${insight.type === "case" ? "flex flex-col gap-8 md:flex-row" : ""}`}>
+          <div className={`px-4 py-8 md:px-8 md:py-12 ${insight.type === "case" ? "flex flex-col-reverse gap-8 md:flex-row" : ""}`}>
             <article className={`${insight.type === "case" ? "flex-1" : "mx-auto max-w-[720px]"}`}>
               {content.map((paragraph, i) => (
                 <p

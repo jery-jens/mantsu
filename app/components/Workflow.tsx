@@ -8,84 +8,85 @@ import Wrapper from "./Wrapper";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const steps = [
-  { label: "Planning", icon: "ri-file-list-3-line" },
-  { label: "Start order", icon: "ri-play-line" },
-  { label: "Quality", icon: "ri-shield-check-line" },
-  { label: "Assembly", icon: "ri-tools-line" },
-  { label: "Packaging", icon: "ri-box-3-line" },
-  { label: "Completion", icon: "ri-check-double-line" },
+const modules = [
+  {
+    label: "Downtime Tracking",
+    icon: "ri-time-line",
+    description: "See every stop, instantly",
+    active: true,
+  },
+  {
+    label: "Quality Control",
+    icon: "ri-shield-check-line",
+    description: "Digital inspections & sign-offs",
+    active: true,
+  },
+  {
+    label: "Shift Handover",
+    icon: "ri-swap-box-line",
+    description: "Structured shift logs",
+    active: true,
+  },
+  {
+    label: "OEE Dashboards",
+    icon: "ri-bar-chart-2-line",
+    description: "Real-time performance",
+    active: false,
+  },
+  {
+    label: "Maintenance",
+    icon: "ri-tools-line",
+    description: "Operator-initiated tickets",
+    active: false,
+  },
+  {
+    label: "Scheduling",
+    icon: "ri-calendar-schedule-line",
+    description: "Drag-and-drop planning",
+    active: false,
+  },
+  {
+    label: "Traceability",
+    icon: "ri-route-line",
+    description: "Batch & material tracking",
+    active: false,
+  },
+  {
+    label: "Connectivity",
+    icon: "ri-plug-line",
+    description: "PLC, OPC-UA, SCADA",
+    active: false,
+  },
 ];
 
 export default function Workflow() {
+  const blocksRef = useRef<(HTMLDivElement | null)[]>([]);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const progressDesktopRef = useRef<HTMLDivElement>(null);
-  const progressMobileRef = useRef<HTMLDivElement>(null);
-  const iconsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const labelsRef = useRef<(HTMLSpanElement | null)[]>([]);
-  const mobileIconsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const mobileLabelsRef = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const totalSteps = steps.length;
+    blocksRef.current.forEach((block, i) => {
+      if (!block) return;
 
-    ScrollTrigger.create({
-      trigger: section,
-      start: "top 80%",
-      end: "top 40%",
-      scrub: 0.3,
-      onUpdate: (self) => {
-        const p = self.progress;
-        const activeIndex = Math.min(
-          Math.floor(p * totalSteps),
-          totalSteps - 1
-        );
-
-        // Desktop progress
-        if (progressDesktopRef.current) {
-          progressDesktopRef.current.style.width = `${p * 100}%`;
+      gsap.fromTo(
+        block,
+        { y: 40, opacity: 0, scale: 0.95 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 75%",
+            toggleActions: "play none none none",
+          },
+          delay: i * 0.08,
         }
-
-        // Mobile progress
-        if (progressMobileRef.current) {
-          progressMobileRef.current.style.height = `${p * 100}%`;
-        }
-
-        const updateIcons = (icons: (HTMLDivElement | null)[], labels: (HTMLSpanElement | null)[]) => {
-          icons.forEach((icon, i) => {
-            if (!icon) return;
-            const iconEl = icon.querySelector("i");
-            if (i <= activeIndex) {
-              icon.style.borderColor = "#e2e8f0";
-              icon.style.backgroundColor = "#1e293b";
-              if (iconEl) {
-                iconEl.style.backgroundImage = "linear-gradient(to bottom, #E8824F, #C70C5B)";
-                iconEl.style.webkitBackgroundClip = "text";
-                iconEl.style.webkitTextFillColor = "transparent";
-              }
-            } else {
-              icon.style.borderColor = "#475569";
-              icon.style.backgroundColor = "#1e293b";
-              if (iconEl) {
-                iconEl.style.backgroundImage = "none";
-                iconEl.style.webkitBackgroundClip = "unset";
-                iconEl.style.webkitTextFillColor = "#64748b";
-              }
-            }
-          });
-
-          labels.forEach((label, i) => {
-            if (!label) return;
-            label.style.color = i <= activeIndex ? "#e2e8f0" : "#64748b";
-          });
-        };
-
-        updateIcons(iconsRef.current, labelsRef.current);
-        updateIcons(mobileIconsRef.current, mobileLabelsRef.current);
-      },
+      );
     });
 
     return () => {
@@ -98,119 +99,86 @@ export default function Workflow() {
   return (
     <div className="border-b border-slate-600 bg-slate-800">
       <Wrapper className="border-slate-600">
-        <div className="px-4 pt-12 text-center md:px-8 md:pt-20">
-          <h2 className="font-serif text-[32px] leading-none tracking-[-0.96px] text-slate-50 md:text-[48px] md:tracking-[-1.44px]">
-            Start with one workflow.
-            <br />
-            <span className="text-gradient">Scale</span> from there.
-          </h2>
-          <p className="mx-auto mt-5 max-w-[520px] text-sm font-normal text-slate-400 md:mt-7 md:text-base">
-            Deploy individual production apps in weeks. Expand step by step —
-            without risky, all-at-once rollouts.
-          </p>
-          <div className="mt-6 flex justify-center">
-            <ButtonGradient href="/product">
-              See modules <i className="ri-arrow-right-line" />
-            </ButtonGradient>
-          </div>
-        </div>
-
-        <div
-          ref={sectionRef}
-          className="mt-10 border-t border-dashed border-slate-600 md:mt-16"
-        >
-          <div className="mx-4 border-x border-dashed border-slate-600 md:mx-12">
-            <div className="relative px-6 py-16 md:px-10 md:py-24">
-              {/* Mobile: vertical layout */}
-              <div className="block md:hidden">
-                <div className="relative flex flex-col items-start gap-4" style={{ paddingLeft: 22 }}>
-                  {/* Background line */}
-                  <div className="absolute left-[21.5px] w-[1px] border-l border-dashed border-slate-600" style={{ top: 22, bottom: 22 }} />
-
-                  {/* Progress line */}
-                  <div
-                    ref={progressMobileRef}
-                    className="absolute left-[21.5px] w-[1px] bg-slate-200"
-                    style={{ top: 22, height: 0, transition: "none", maxHeight: "calc(100% - 44px)" }}
-                  />
-
-                  {steps.map((step, i) => (
-                    <div
-                      key={i}
-                      className="relative z-10 flex items-center gap-3"
-                    >
-                      <div
-                        ref={(el) => { mobileIconsRef.current[i] = el; }}
-                        className="flex h-11 w-11 shrink-0 items-center justify-center border border-slate-600 bg-slate-800 text-slate-400 transition-colors duration-300"
-                        style={{ marginLeft: -22 }}
-                      >
-                        <i className={`${step.icon} text-lg`} />
-                      </div>
-                      <span
-                        ref={(el) => { mobileLabelsRef.current[i] = el; }}
-                        className="text-xs text-slate-500 transition-colors duration-300"
-                      >
-                        {step.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Desktop: horizontal layout */}
-              <div className="hidden md:block">
-                <div className="relative flex items-start justify-between">
-                  {/* Background line */}
-                  <div className="absolute top-[21px] h-[1px] border-t border-dashed border-slate-600" style={{ left: 22, right: 22 }} />
-
-                  {/* Progress line */}
-                  <div
-                    ref={progressDesktopRef}
-                    className="absolute top-[21px] h-[1px] w-0 bg-slate-200"
-                    style={{ left: 22, transition: "none", maxWidth: "calc(100% - 44px)" }}
-                  />
-
-                  {steps.map((step, i) => (
-                    <div
-                      key={i}
-                      className="relative z-10 flex flex-col items-center gap-2.5"
-                    >
-                      <div
-                        ref={(el) => { iconsRef.current[i] = el; }}
-                        className="flex h-11 w-11 items-center justify-center border border-slate-600 bg-slate-800 text-slate-400 transition-colors duration-300"
-                      >
-                        <i className={`${step.icon} text-lg`} />
-                      </div>
-                      <span
-                        ref={(el) => { labelsRef.current[i] = el; }}
-                        className="max-w-[72px] text-center text-[10px] leading-tight text-slate-500 transition-colors duration-300"
-                      >
-                        {step.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Mantsu bar */}
-              <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2">
-                <div className="h-[1px] w-6 bg-gradient-to-r from-transparent to-[#E8824F]" />
-                <span className="flex items-center gap-1.5 text-[10px] font-normal uppercase tracking-widest text-slate-400">
-                  Connected by{" "}
-                  <img
-                    src="/mantsu-icon.svg"
-                    alt=""
-                    className="inline h-3 w-3"
-                  />{" "}
-                  Mantsu
-                </span>
-                <div className="h-[1px] w-6 bg-gradient-to-r from-[#C70C5B] to-transparent" />
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Left: copy */}
+          <div className="flex flex-col justify-center border-b border-slate-600 px-6 py-12 md:border-b-0 md:border-r md:px-12 md:py-20">
+            <span className="font-mono text-[10px] uppercase text-slate-400">
+              //&nbsp;&nbsp;MODULAR BY DESIGN
+            </span>
+            <h2 className="mt-6 font-serif text-[32px] leading-none tracking-[-0.96px] text-slate-50 md:mt-10 md:text-[48px] md:tracking-[-1.44px]">
+              Start with one.
+              <br />
+              <span className="text-gradient">Stack</span> as you grow.
+            </h2>
+            <p className="mt-5 max-w-[400px] text-sm font-normal leading-relaxed text-slate-400 md:mt-7 md:text-base">
+              Each module is a standalone production app. Deploy one in weeks,
+              add more when you&apos;re ready — no dependencies, no big bang.
+            </p>
+            <div className="mt-8">
+              <ButtonGradient href="/pricing">
+                See modules <i className="ri-arrow-right-line" />
+              </ButtonGradient>
             </div>
           </div>
-          <div className="border-b border-solid border-slate-600" />
+
+          {/* Right: module blocks grid */}
+          <div ref={sectionRef}>
+            <div className="grid grid-cols-1 sm:grid-cols-2">
+              {modules.map((mod, i) => (
+                <div
+                  key={mod.label}
+                  ref={(el) => { blocksRef.current[i] = el; }}
+                  className={`group relative flex flex-col gap-4 border-b border-dashed border-slate-600 p-5 transition-all md:p-5 ${
+                    i % 2 === 0 ? "sm:border-r" : ""
+                  } ${i === modules.length - 1 ? "border-b-0" : ""} ${i >= modules.length - 2 ? "sm:border-b-0" : ""} ${
+                    mod.active ? "bg-slate-700/30" : "bg-transparent"
+                  }`}
+                >
+                  {mod.active && (
+                    <span
+                      className="absolute right-4 top-4 flex h-5 items-center rounded-full px-2 text-[10px] font-medium text-white"
+                      style={{ background: "linear-gradient(to right, #E8824F, #C70C5B)" }}
+                    >
+                      Active
+                    </span>
+                  )}
+                  {!mod.active && (
+                    <i className="ri-add-line absolute right-4 top-4 text-sm text-slate-600" />
+                  )}
+                  <div
+                    className={`flex h-9 w-9 items-center justify-center ${
+                      mod.active ? "bg-slate-600" : "bg-slate-700/50"
+                    }`}
+                  >
+                    <i
+                      className={`${mod.icon} text-base ${
+                        mod.active ? "text-slate-50" : "text-slate-500"
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <p
+                      className={`text-sm font-medium ${
+                        mod.active ? "text-slate-50" : "text-slate-500"
+                      }`}
+                    >
+                      {mod.label}
+                    </p>
+                    <p
+                      className={`mt-0.5 text-xs ${
+                        mod.active ? "text-slate-400" : "text-slate-600"
+                      }`}
+                    >
+                      {mod.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
         </div>
-        <div className="h-16" />
       </Wrapper>
     </div>
   );

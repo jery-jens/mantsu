@@ -22,7 +22,7 @@ export default function Video() {
           <span className="font-mono text-[10px] uppercase text-slate-400">
             //&nbsp;&nbsp;SEE IT IN ACTION
           </span>
-          <h2 className="mt-6 whitespace-nowrap font-serif text-[32px] leading-none tracking-[-0.96px] text-slate-900 md:mt-10 md:text-[48px] md:tracking-[-1.44px]">
+          <h2 className="mt-6 font-serif text-[28px] leading-none tracking-[-0.84px] text-slate-900 md:mt-10 md:text-[48px] md:tracking-[-1.44px]">
             Watch how <span className="text-gradient">Mantsu</span> works.
           </h2>
         </div>

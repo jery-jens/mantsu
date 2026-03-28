@@ -14,7 +14,7 @@ export default function Platform() {
         </div>
 
         <div className="mt-6 border-t border-slate-200 md:mt-10">
-          <div className="mx-8 overflow-hidden border-x border-slate-200 bg-white">
+          <div className="mx-4 overflow-hidden border-x border-slate-200 bg-white md:mx-8">
             <div className="relative h-[280px] bg-slate-50 md:h-[560px]">
               <Image
                 src="/location.png"

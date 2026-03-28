@@ -235,7 +235,7 @@ export default function PricingV2Page() {
                     step={5}
                     value={users}
                     onChange={(e) => setUsers(Number(e.target.value))}
-                    className="mt-4 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-slate-200 accent-slate-900 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-slate-900"
+                    className="mt-4 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-slate-200 accent-slate-900 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-slate-900"
                   />
                   <div className="mt-2 flex justify-between text-xs text-slate-400">
                     <span>5</span>
@@ -320,7 +320,7 @@ export default function PricingV2Page() {
 
             {/* Right: Calculator summary (sticky) */}
             <div className="p-6 md:p-8">
-              <div className="sticky top-[120px]">
+              <div className="md:sticky md:top-[120px]">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
                   //&nbsp;&nbsp;YOUR ESTIMATE
                 </span>
