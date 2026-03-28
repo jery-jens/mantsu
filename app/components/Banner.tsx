@@ -8,7 +8,7 @@ export default function Banner() {
       </p>
       <Link
         href="#"
-        className="flex items-center gap-1 text-sm font-medium text-slate-400 hover:underline"
+        className="flex items-center gap-1 text-sm font-medium text-slate-400 hover:text-slate-300"
       >
         Read more <i className="ri-arrow-right-line" />
       </Link>

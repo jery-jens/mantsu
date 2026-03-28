@@ -13,14 +13,9 @@ export default function Platform() {
           </h2>
         </div>
 
-        <div className="mt-10 border-t border-slate-200 md:mt-20">
-          <div className="mx-auto max-w-[834px] overflow-hidden border-x border-slate-200 bg-white">
-            <div className="flex items-center gap-1.5 border-b border-slate-200 px-3 py-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-              <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
-              <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
-            </div>
-            <div className="relative h-[180px] bg-slate-50 md:h-[300px]">
+        <div className="mt-6 border-t border-slate-200 md:mt-10">
+          <div className="mx-8 overflow-hidden border-x border-slate-200 bg-white">
+            <div className="relative h-[280px] bg-slate-50 md:h-[560px]">
               <Image
                 src="/location.png"
                 alt="Platform interface"
@@ -31,8 +26,8 @@ export default function Platform() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 border-t border-slate-200 md:grid-cols-2">
-          <div className="flex flex-col gap-6 border-b border-slate-200 p-6 md:border-b-0 md:border-r md:p-12">
+        <div className="grid grid-cols-1 border-t border-slate-200 sm:grid-cols-3">
+          <div className="flex flex-col gap-6 border-b border-slate-200 p-6 sm:border-b-0 sm:border-r sm:p-8">
             <Image
               src="/icon-operational.svg"
               alt="Operational impact"
@@ -44,13 +39,11 @@ export default function Platform() {
                 Immediate operational impact
               </h3>
               <p className="mt-4 text-sm font-normal text-slate-500">
-                Reduce downtime. Improve quality.
-                <br />
-                Give managers real-time visibility across production.
+                Reduce downtime. Improve quality. Give managers real-time visibility across production.
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-6 p-6 md:p-12">
+          <div className="flex flex-col gap-6 border-b border-slate-200 p-6 sm:border-b-0 sm:border-r sm:p-8">
             <Image
               src="/icon-architecture.svg"
               alt="Future-proof architecture"
@@ -62,9 +55,23 @@ export default function Platform() {
                 Future-proof architecture
               </h3>
               <p className="mt-4 text-sm font-normal text-slate-500">
-                Low-code foundation. Modular deployment.
-                <br />
-                Built to evolve as your factory evolves.
+                Low-code foundation. Modular deployment. Built to evolve as your factory evolves.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 p-6 sm:p-8">
+            <Image
+              src="/icon-operational.svg"
+              alt="Seamless integration"
+              width={40}
+              height={40}
+            />
+            <div>
+              <h3 className="font-serif text-[20px] leading-none tracking-[-0.6px] text-slate-900">
+                Seamless integration
+              </h3>
+              <p className="mt-4 text-sm font-normal text-slate-500">
+                Connect with ERP, PLC, and SCADA systems. No rip-and-replace needed.
               </p>
             </div>
           </div>

@@ -1,12 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Stats from "./Stats";
 import Wrapper from "./Wrapper";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   {
@@ -66,53 +63,6 @@ const features = [
   },
 ];
 
-const stats = [
-  { num: 3, prefix: "", suffix: " months", description: "Average time to first production" },
-  { num: 30, prefix: "–", suffix: "% downtime", description: "Reported reduction after Mantsu" },
-  { num: 100, prefix: "", suffix: "% connected", description: "Machines, operators and systems" },
-  { num: 24, prefix: "", suffix: "/7 secure", description: "Encrypted data in transit and at rest" },
-];
-
-function CountUp({ num, prefix, suffix }: { num: number; prefix: string; suffix: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const triggered = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const obj = { val: 0 };
-
-    ScrollTrigger.create({
-      trigger: el,
-      start: "top 90%",
-      onEnter: () => {
-        if (triggered.current) return;
-        triggered.current = true;
-        gsap.to(obj, {
-          val: num,
-          duration: 1.5,
-          ease: "power2.out",
-          onUpdate: () => {
-            el.textContent = `${prefix}${Math.round(obj.val)}${suffix}`;
-          },
-        });
-      },
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((t) => {
-        if (t.trigger === el) t.kill();
-      });
-    };
-  }, [num, prefix, suffix]);
-
-  return (
-    <span ref={ref}>
-      {prefix}0{suffix}
-    </span>
-  );
-}
 
 export default function Features() {
   const [active, setActive] = useState(0);
@@ -206,27 +156,8 @@ export default function Features() {
           </div>
         </div>
 
-        {/* Stats bar */}
-        <div className="grid grid-cols-2 border-t border-slate-600 md:grid-cols-4">
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className={`px-6 py-6 md:px-8 md:py-8 ${
-                i < 3 ? "md:border-r md:border-slate-600" : ""
-              } ${i % 2 === 0 ? "border-r border-slate-600" : ""} ${
-                i < 2 ? "border-b border-slate-600 md:border-b-0" : ""
-              }`}
-            >
-              <p className="font-serif text-[24px] leading-none tracking-[-0.72px] text-slate-50 md:text-[32px] md:tracking-[-0.96px]">
-                <CountUp num={stat.num} prefix={stat.prefix} suffix={stat.suffix} />
-              </p>
-              <p className="mt-3 text-xs font-normal text-slate-400 md:text-sm">
-                {stat.description}
-              </p>
-            </div>
-          ))}
-        </div>
       </Wrapper>
+      <Stats variant="dark" />
     </div>
   );
 }

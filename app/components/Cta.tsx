@@ -15,7 +15,7 @@ export default function Cta() {
           />
           <div className="relative z-10 flex flex-col items-center text-center">
             <h2 className="max-w-[523px] font-serif text-[36px] leading-none tracking-[-1.08px] text-slate-900 md:text-[64px] md:tracking-[-1.92px]">
-              Ready to modernize your factory?
+              Ready to <span className="text-gradient">modernize</span> your factory?
             </h2>
             <p className="mt-4 max-w-[520px] text-sm font-normal leading-6 text-slate-500 md:mt-5 md:text-base">
               See how Mantsu can reduce downtime, improve quality and deliver

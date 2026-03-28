@@ -119,11 +119,6 @@ export default function Templates() {
 
               <div className="border-t border-slate-200 p-6 md:border-t-0 md:border-l md:p-16">
                 <div className="overflow-hidden border border-slate-200 bg-white">
-                  <div className="flex items-center gap-1.5 border-b border-slate-200 px-3 py-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
-                    <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
-                  </div>
                   <div className="relative h-[240px] overflow-hidden bg-slate-50 md:h-[400px]">
                     {tab.image ? (
                       <Image

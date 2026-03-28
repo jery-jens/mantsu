@@ -3,9 +3,31 @@ import Wrapper from "../../components/Wrapper";
 import Divider from "../../components/Divider";
 import Cta from "../../components/Cta";
 import Footer from "../../components/Footer";
+import ShareBar from "../../components/ShareBar";
 import { insights as allInsights } from "../page";
 
 const insightsContent: Record<string, string[]> = {
+  "european-packaging-group": [
+    "European Packaging Group operates three production plants across Belgium, running 24/7 packaging lines for FMCG clients. With growing customer demands and aging infrastructure, their operations team was drowning in manual downtime tracking, paper-based shift handovers, and disconnected reporting.",
+    "They'd scoped a traditional MES project — 18 months, seven-figure budget, full plant rollout. But after two failed vendor pilots, the COO decided to try a different approach. They started with Mantsu on a single packaging line in Gent.",
+    "Week 1–2: Mantsu deployed a downtime tracking app on the line. Operators logged stops on tablets mounted at each station. Within days, the team had visibility into downtime patterns they'd been guessing about for years.",
+    "Month 2: A second app went live for shift handover — replacing a paper logbook that had been the source of recurring miscommunication between shifts. The digital handover cut changeover-related stops by 40%.",
+    "Month 3: Real-time dashboards connected both apps, giving plant managers live OEE data for the first time. Downtime on the pilot line dropped 30%. The board approved rollout to the remaining two plants.",
+  ],
+  "nordsteel-industries": [
+    "NordSteel Industries is a Scandinavian steel producer with operations spanning three countries. Their challenge wasn't a lack of technology — it was too much of it. Each plant had its own mix of legacy systems, custom scripts, and manual processes.",
+    "The VP of Operations had a clear vision: standardize production visibility across all sites without forcing a single system on plants that had evolved independently over decades. A traditional MES approach would have meant years of integration work and significant disruption.",
+    "Mantsu started with one extrusion line in their Swedish facility. A simple production tracking app replaced a whiteboard-based scheduling system. Operators adopted it within the first week — no training sessions needed, just a tablet at the workstation.",
+    "Within six weeks, the same app template was adapted and deployed to a line in their Norwegian plant. Different products, different workflows, but the same modular foundation. The local team customized their own dashboards without IT involvement.",
+    "Today, NordSteel runs Mantsu across three plants and twelve production lines. Each plant maintains its own configurations while corporate gets unified reporting. The rollout that was quoted at 24 months by three MES vendors took 5 months with Mantsu.",
+  ],
+  "precision-manufacturing-ag": [
+    "Precision Manufacturing AG is a German manufacturer of high-tolerance components for automotive and aerospace clients. Their existing MES had been in place for over a decade — deeply integrated, heavily customized, and increasingly brittle.",
+    "Replacing it was out of the question. The risk of disrupting production for their automotive OEM clients was too high. But the system couldn't support the new quality documentation requirements their aerospace customers demanded.",
+    "The CTO proposed a layer approach: keep the existing MES for what it does well, and add Mantsu modules for the gaps. First target: a quality inspection app that could capture measurements, photos, and sign-offs digitally — replacing a paper-based process that had caused two audit findings.",
+    "The quality app went live in 8 weeks. Inspectors used tablets on the shop floor, data flowed directly into customer-facing reports, and the audit trail was automatic. Their next aerospace audit passed with zero findings for the first time.",
+    "ROI came in the first quarter — not from cost savings, but from a new aerospace contract they won specifically because they could demonstrate digital quality traceability. Mantsu paid for itself before the first invoice was due.",
+  ],
   "why-mes-projects-fail": [
     "Manufacturing Execution Systems have been around for decades, yet the majority of large-scale MES rollouts still fail to deliver on their promises. The reasons are well-documented: scope creep, integration nightmares, change management friction, and timelines that stretch from months into years.",
     "The fundamental problem isn't the technology — it's the approach. Traditional MES projects attempt to replace everything at once. A single vendor, a single platform, a single cutover date. This 'big bang' strategy puts enormous pressure on every stakeholder, from IT to operators on the floor.",
@@ -107,8 +129,32 @@ export default async function InsightDetailPage({
     .filter((i) => i.slug !== slug)
     .slice(0, 3);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: insight.title,
+    description: insight.excerpt,
+    datePublished: insight.date,
+    author: {
+      "@type": "Organization",
+      name: "Mantsu",
+      url: "https://mantsu.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Mantsu",
+      logo: { "@type": "ImageObject", url: "https://mantsu.com/mantsu-logo-new.svg" },
+    },
+    mainEntityOfPage: `https://mantsu.com/insights/${slug}`,
+    articleSection: insight.category,
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <div className="border-b border-slate-200 bg-slate-50">
         <Wrapper>
           <section className="px-4 pt-12 pb-10 md:px-8 md:pt-16 md:pb-12">
@@ -116,11 +162,17 @@ export default async function InsightDetailPage({
               href="/insights"
               className="inline-flex items-center gap-1 text-sm font-medium text-slate-400 hover:text-slate-600"
             >
-              <i className="ri-arrow-left-line text-xs" /> Back to insights
+              <i className="ri-arrow-left-line text-xs" /> Back to resources
             </Link>
             <div className="mt-6 flex items-center gap-3 md:mt-8">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
-                {insight.category}
+              <span
+                className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${
+                  insight.type === "case"
+                    ? "bg-gradient-to-r from-[#E8824F] to-[#C70C5B] text-white"
+                    : "bg-slate-200 text-slate-600"
+                }`}
+              >
+                {insight.type === "case" ? "Case study" : "Blog"}
               </span>
               <span className="text-xs text-slate-300">·</span>
               <span className="text-xs text-slate-400">{insight.date}</span>
@@ -129,6 +181,21 @@ export default async function InsightDetailPage({
               {insight.title}
             </h1>
           </section>
+
+          {/* Author + share */}
+          <div className="flex items-center justify-between border-t border-slate-200 px-4 py-4 md:px-8">
+            <div className="flex items-center gap-3">
+              <div className="h-9 w-9 shrink-0 rounded-full bg-slate-200" />
+              <div>
+                <p className="text-sm font-medium text-slate-900">Mantsu Team</p>
+                <p className="text-xs text-slate-400">Editorial</p>
+              </div>
+            </div>
+            <ShareBar
+              url={`https://mantsu.com/insights/${slug}`}
+              title={insight.title}
+            />
+          </div>
         </Wrapper>
       </div>
 
@@ -136,21 +203,55 @@ export default async function InsightDetailPage({
 
       <div className="border-b border-slate-200 bg-slate-50">
         <Wrapper>
-          <div className="mx-auto max-w-[720px] px-4 pt-8 md:px-8 md:pt-12">
+          <div className="px-8 pt-8">
             <div className="aspect-[16/9] w-full bg-slate-200" />
           </div>
-          <article className="mx-auto max-w-[720px] px-4 py-8 md:px-8 md:py-12">
-            {content.map((paragraph, i) => (
-              <p
-                key={i}
-                className={`text-base leading-relaxed text-slate-600 ${
-                  i > 0 ? "mt-6" : ""
-                }`}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </article>
+          <div className={`px-4 py-8 md:px-8 md:py-12 ${insight.type === "case" ? "flex flex-col gap-8 md:flex-row" : ""}`}>
+            <article className={`${insight.type === "case" ? "flex-1" : "mx-auto max-w-[720px]"}`}>
+              {content.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className={`text-base leading-relaxed text-slate-600 ${
+                    i > 0 ? "mt-6" : ""
+                  }`}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </article>
+
+            {insight.type === "case" && (
+              <aside className="w-full shrink-0 md:w-[240px]">
+                <div className="sticky top-[120px] space-y-6 border border-slate-200 bg-white p-6">
+                  {/* Logo placeholder */}
+                  <div className="flex h-16 items-center justify-center bg-slate-100">
+                    <div className="h-6 w-[100px] rounded bg-slate-300" />
+                  </div>
+
+                  <div className="space-y-4">
+                    {insight.industry && (
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Industry</p>
+                        <p className="mt-1 text-sm font-medium text-slate-900">{insight.industry}</p>
+                      </div>
+                    )}
+                    {insight.region && (
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Region</p>
+                        <p className="mt-1 text-sm font-medium text-slate-900">{insight.region}</p>
+                      </div>
+                    )}
+                    {insight.year && (
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-widest text-slate-400">Year</p>
+                        <p className="mt-1 text-sm font-medium text-slate-900">{insight.year}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </aside>
+            )}
+          </div>
         </Wrapper>
       </div>
 

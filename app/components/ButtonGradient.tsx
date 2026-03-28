@@ -7,9 +7,10 @@ import gsap from "gsap";
 interface ButtonGradientProps {
   href: string;
   children: React.ReactNode;
+  size?: "default" | "lg";
 }
 
-export default function ButtonGradient({ href, children }: ButtonGradientProps) {
+export default function ButtonGradient({ href, children, size = "default" }: ButtonGradientProps) {
   const bgRef = useRef<HTMLSpanElement>(null);
 
   const handleEnter = () => {
@@ -31,7 +32,9 @@ export default function ButtonGradient({ href, children }: ButtonGradientProps) 
   return (
     <Link
       href={href}
-      className="relative inline-flex h-8 items-center gap-1 px-4 text-sm font-medium text-white"
+      className={`relative inline-flex items-center gap-1 font-medium text-white ${
+        size === "lg" ? "h-11 px-6 text-base" : "h-8 px-4 text-sm"
+      }`}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >

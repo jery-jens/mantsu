@@ -15,18 +15,11 @@ export default function Visuals() {
             />
           </div>
           <div className="flex-1 overflow-x-auto border border-slate-200 bg-white">
-            <div className="flex items-center justify-between border-b border-slate-200 px-3 py-2">
-              <div className="flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
-                <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
-                  RECENT DOWNTIMES
-                </span>
-                <Image src="/mantsu-icon.svg" alt="Mantsu" width={16} height={16} />
-              </div>
+            <div className="flex items-center justify-end gap-2 border-b border-slate-200 px-3 py-2">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-slate-400">
+                RECENT DOWNTIMES
+              </span>
+              <Image src="/mantsu-icon.svg" alt="Mantsu" width={16} height={16} />
             </div>
             <table className="w-full min-w-[480px] text-left">
               <thead>

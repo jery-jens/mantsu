@@ -11,7 +11,8 @@ import Wrapper from "./Wrapper";
 const navLinks = [
   { href: "/product", label: "Product" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/insights", label: "Insights" },
+  { href: "/insights", label: "Resources" },
+  { href: "https://docs.mantsu.com", label: "Docs", external: true },
 ];
 
 export default function Header() {
@@ -28,15 +29,16 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 md:flex">
-            {navLinks.map(({ href, label }) => {
+            {navLinks.map(({ href, label, external }) => {
               const isActive =
-                pathname === href || pathname.startsWith(href + "/");
+                !external && (pathname === href || pathname.startsWith(href + "/"));
 
               return (
                 <Link
                   key={href}
                   href={href}
-                  className={`rounded-full px-4 py-1.5 text-sm font-medium ${
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className={`inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-sm font-medium ${
                     isActive
                       ? "bg-slate-900 text-white"
                       : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
@@ -70,23 +72,24 @@ export default function Header() {
         {menuOpen && (
           <div className="border-t border-slate-200 px-4 pb-4 md:hidden">
             <nav className="flex flex-col gap-1 pt-3">
-              {navLinks.map(({ href, label }) => {
+              {navLinks.map(({ href, label, external }) => {
                 const isActive =
-                  pathname === href || pathname.startsWith(href + "/");
+                  !external && (pathname === href || pathname.startsWith(href + "/"));
 
                 return (
                   <Link
                     key={href}
                     href={href}
                     onClick={() => setMenuOpen(false)}
-                    className={`rounded-lg px-4 py-2.5 text-sm font-medium ${
+                    {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className={`inline-flex items-center gap-1 rounded-lg px-4 py-2.5 text-sm font-medium ${
                       isActive
                         ? "bg-slate-900 text-white"
                         : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     }`}
                   >
                     {label}
-                  </Link>
+                    </Link>
                 );
               })}
             </nav>

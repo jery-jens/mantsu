@@ -8,9 +8,10 @@ interface ButtonOutlineProps {
   href: string;
   children: React.ReactNode;
   variant?: "light" | "dark";
+  size?: "default" | "lg";
 }
 
-export default function ButtonOutline({ href, children, variant = "light" }: ButtonOutlineProps) {
+export default function ButtonOutline({ href, children, variant = "light", size = "default" }: ButtonOutlineProps) {
   const bgRef = useRef<HTMLSpanElement>(null);
 
   const handleEnter = () => {
@@ -32,7 +33,9 @@ export default function ButtonOutline({ href, children, variant = "light" }: But
   return (
     <Link
       href={href}
-      className={`relative inline-flex h-8 items-center px-4 text-sm font-medium ${
+      className={`relative inline-flex items-center font-medium ${
+        size === "lg" ? "h-11 px-6 text-base" : "h-8 px-4 text-sm"
+      } ${
         variant === "dark" ? "text-slate-200" : "text-neutral-950"
       }`}
       onMouseEnter={handleEnter}

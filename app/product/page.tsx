@@ -36,11 +36,6 @@ export default function ProductPage() {
 
           <div className="mt-10 border-t border-slate-200 md:mt-16">
             <div className="mx-auto max-w-[834px] overflow-hidden border-x border-slate-200 bg-white">
-              <div className="flex items-center gap-1.5 border-b border-slate-200 px-3 py-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
-                <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
-              </div>
               <div className="relative h-[180px] bg-slate-50 md:h-[400px]">
                 <Image
                   src="/location.png"
