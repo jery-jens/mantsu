@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Banner() {
   return (
-    <div className="flex items-center justify-center gap-3.5 bg-slate-800 border-b border-slate-200 px-4 py-2.5 font-sans">
+    <div className="flex items-center justify-center gap-3.5 bg-slate-800 border-b border-slate-600 px-4 py-2.5 font-sans">
       <p className="text-sm font-medium text-white">
         Matsu v1.0 is officially live
       </p>

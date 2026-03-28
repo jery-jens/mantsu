@@ -83,10 +83,10 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
       <Hero />
-      <Stats />
-      <Divider />
+      <Stats variant="dark" />
+      <Divider variant="dark" />
       <Logos />
-      <Divider />
+      <Divider variant="dark" />
       <Statement />
       <Divider />
       <Platform />

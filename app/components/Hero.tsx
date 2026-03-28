@@ -72,17 +72,17 @@ export default function Hero() {
   }, [activeSlide]);
 
   return (
-    <div className="border-b border-slate-200 bg-slate-50">
-      <Wrapper>
+    <div className="border-b border-slate-600 bg-slate-800">
+      <Wrapper className="border-slate-600">
         <div className="flex flex-col md:grid md:grid-cols-2 md:min-h-[70vh]">
           {/* Left: text */}
           <section className="flex flex-col justify-center px-6 py-10 md:px-12">
             <h1
-              className="font-serif text-[32px] leading-none tracking-[-0.96px] text-slate-900 md:text-[56px] md:tracking-[-2.24px]"
+              className="font-serif text-[32px] leading-none tracking-[-0.96px] text-slate-50 md:text-[56px] md:tracking-[-2.24px]"
             >
               Production shouldn&apos;t run on <span className="text-gradient">spreadsheets</span> and guesswork.
             </h1>
-            <p className="mt-6 max-w-[420px] text-base font-normal text-slate-600">
+            <p className="mt-6 max-w-[420px] text-base font-normal text-slate-400">
               Deploy modular production apps in 3 months, eliminate manual
               processes, and gain real-time control — without risky &quot;big
               bang&quot; MES projects.
@@ -91,13 +91,13 @@ export default function Hero() {
               <ButtonGradient href="/contact" size="lg">
                 Talk to us <i className="ri-arrow-right-line" />
               </ButtonGradient>
-              <ButtonOutline href="/product" size="lg">See how it works</ButtonOutline>
+              <ButtonOutline href="/product" size="lg" variant="dark">See how it works</ButtonOutline>
             </div>
           </section>
 
           {/* Right: visual with gradient bg */}
           <div
-            className="relative flex flex-col overflow-hidden border-t border-slate-200 md:border-t-0 md:border-l"
+            className="relative flex flex-col overflow-hidden border-t border-slate-600 md:border-t-0 md:border-l"
             style={{
               background: "linear-gradient(135deg, #E8824F, #C70C5B)",
             }}

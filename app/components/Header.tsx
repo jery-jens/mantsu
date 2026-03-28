@@ -18,13 +18,19 @@ const navLinks = [
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const isDark = pathname === "/";
 
   return (
-    <div className="border-b border-slate-200 bg-slate-50">
-      <Wrapper>
+    <div className={`border-b ${isDark ? "border-slate-600 bg-slate-800" : "border-slate-200 bg-slate-50"}`}>
+      <Wrapper className={isDark ? "border-slate-600" : ""}>
         <header className="relative flex items-center px-4 py-4 font-sans md:px-8">
           <Link href="/">
-            <Image src="/mantsu-logo-new.svg" alt="Mantsu" width={108} height={33} />
+            <Image
+              src={isDark ? "/mantsu-logo-new-white.svg" : "/mantsu-logo-new.svg"}
+              alt="Mantsu"
+              width={108}
+              height={33}
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -40,8 +46,12 @@ export default function Header() {
                   {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className={`inline-flex items-center gap-1 rounded-full px-4 py-1.5 text-sm font-medium ${
                     isActive
-                      ? "bg-slate-900 text-white"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                      ? isDark
+                        ? "bg-white text-slate-900"
+                        : "bg-slate-900 text-white"
+                      : isDark
+                        ? "text-slate-400 hover:bg-slate-700 hover:text-slate-50"
+                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                   }`}
                 >
                   {label}
@@ -52,7 +62,7 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="ml-auto hidden items-center gap-1 md:flex">
-            <ButtonOutline href="/contact">Book a demo</ButtonOutline>
+            <ButtonOutline href="/contact" variant={isDark ? "dark" : "light"}>Book a demo</ButtonOutline>
             <ButtonGradient href="/contact">
               Talk to us <i className="ri-arrow-right-line" />
             </ButtonGradient>
@@ -61,7 +71,9 @@ export default function Header() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="ml-auto flex h-10 w-10 items-center justify-center rounded-full text-slate-600 hover:bg-slate-100 md:hidden"
+            className={`ml-auto flex h-10 w-10 items-center justify-center rounded-full md:hidden ${
+              isDark ? "text-slate-400 hover:bg-slate-700" : "text-slate-600 hover:bg-slate-100"
+            }`}
             aria-label="Toggle menu"
           >
             <i className={menuOpen ? "ri-close-line text-lg" : "ri-menu-line text-lg"} />
@@ -70,7 +82,7 @@ export default function Header() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="border-t border-slate-200 px-4 pb-4 md:hidden">
+          <div className={`border-t px-4 pb-4 md:hidden ${isDark ? "border-slate-600" : "border-slate-200"}`}>
             <nav className="flex flex-col gap-1 pt-3">
               {navLinks.map(({ href, label, external }) => {
                 const isActive =
@@ -84,17 +96,21 @@ export default function Header() {
                     {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className={`inline-flex items-center gap-1 rounded-lg px-4 py-2.5 text-sm font-medium ${
                       isActive
-                        ? "bg-slate-900 text-white"
-                        : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                        ? isDark
+                          ? "bg-white text-slate-900"
+                          : "bg-slate-900 text-white"
+                        : isDark
+                          ? "text-slate-400 hover:bg-slate-700 hover:text-slate-50"
+                          : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     }`}
                   >
                     {label}
-                    </Link>
+                  </Link>
                 );
               })}
             </nav>
-            <div className="mt-3 flex flex-col gap-2 border-t border-slate-200 pt-3">
-              <ButtonOutline href="/contact">Book a demo</ButtonOutline>
+            <div className={`mt-3 flex flex-col gap-2 border-t pt-3 ${isDark ? "border-slate-600" : "border-slate-200"}`}>
+              <ButtonOutline href="/contact" variant={isDark ? "dark" : "light"}>Book a demo</ButtonOutline>
               <ButtonGradient href="/contact">
                 Talk to us <i className="ri-arrow-right-line" />
               </ButtonGradient>
