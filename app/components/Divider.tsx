@@ -1,9 +1,14 @@
+"use client";
+
+import { useHeroVariant } from "./HeroContext";
+
 interface DividerProps {
   variant?: "light" | "dark";
 }
 
 export default function Divider({ variant = "light" }: DividerProps) {
-  const isLight = variant === "light";
+  const { mode } = useHeroVariant();
+  const isLight = variant === "dark" ? mode === "light" : variant === "light";
 
   return (
     <div

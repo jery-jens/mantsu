@@ -1,9 +1,15 @@
+"use client";
+
 import Cta from "./components/Cta";
 import Divider from "./components/Divider";
 import Faq from "./components/Faq";
 import Footer from "./components/Footer";
 import ForWho from "./components/ForWho";
 import Hero from "./components/Hero";
+import HeroCentered from "./components/HeroCentered";
+import HeroCenteredImage from "./components/HeroCenteredImage";
+import { useHeroVariant } from "./components/HeroContext";
+
 import Logos from "./components/Logos";
 import Statement from "./components/Statement";
 import Platform from "./components/Platform";
@@ -11,6 +17,12 @@ import Testimonials from "./components/Testimonials";
 import Stats from "./components/Stats";
 import Video from "./components/Video";
 import Workflow from "./components/Workflow";
+
+const heroComponents = {
+  1: Hero,
+  2: HeroCentered,
+  3: HeroCenteredImage,
+} as const;
 
 const faqStructuredData = {
   "@context": "https://schema.org",
@@ -76,13 +88,16 @@ const faqStructuredData = {
 };
 
 export default function Home() {
+  const { variant } = useHeroVariant();
+  const ActiveHero = heroComponents[variant];
+
   return (
     <main>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
-      <Hero />
+      <ActiveHero />
       <Stats variant="dark" />
       <Divider variant="dark" />
       <Logos />

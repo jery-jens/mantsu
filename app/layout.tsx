@@ -3,8 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BackToTop from "./components/BackToTop";
 import Banner from "./components/Banner";
+import ContentWrapper from "./components/ContentWrapper";
 import CookieBanner from "./components/CookieBanner";
 import Header from "./components/Header";
+import { HeroProvider } from "./components/HeroContext";
+import HeroSelector from "./components/HeroSelector";
 import ScrollProgress from "./components/ScrollProgress";
 import SmoothScroll from "./components/SmoothScroll";
 
@@ -101,17 +104,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SmoothScroll />
-        <ScrollProgress />
-        <div className="fixed top-0 left-0 right-0 z-50">
-          <Banner />
-          <Header />
-        </div>
-        <div className="pt-[96px]">
-          {children}
-        </div>
-        <CookieBanner />
-        <BackToTop />
+        <HeroProvider>
+          <SmoothScroll />
+          <ScrollProgress />
+          <div className="fixed top-0 left-0 right-0 z-50">
+            <HeroSelector />
+            <Banner />
+            <Header />
+          </div>
+          <ContentWrapper>
+            {children}
+          </ContentWrapper>
+          <CookieBanner />
+          <BackToTop />
+        </HeroProvider>
       </body>
     </html>
   );

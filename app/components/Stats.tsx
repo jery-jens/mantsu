@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useHeroVariant } from "./HeroContext";
 import Wrapper from "./Wrapper";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -60,10 +61,11 @@ interface StatsProps {
 }
 
 export default function Stats({ variant = "light" }: StatsProps) {
-  const isLight = variant === "light";
+  const { mode } = useHeroVariant();
+  const isLight = variant === "dark" ? mode === "light" : variant === "light";
 
   return (
-    <div className={`border-b ${isLight ? "border-slate-200 bg-slate-50" : "border-t border-slate-600 bg-slate-800"}`}>
+    <div className={`border-b ${isLight ? "border-slate-200 bg-slate-50" : "border-slate-600 bg-slate-800"}`}>
       <Wrapper className={isLight ? "" : "border-slate-600"}>
         <div className={`grid grid-cols-2 md:grid-cols-4`}>
           {stats.map((stat, i) => (

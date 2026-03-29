@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ButtonOutline from "./ButtonOutline";
 import ButtonGradient from "./ButtonGradient";
+import { useHeroVariant } from "./HeroContext";
 import Wrapper from "./Wrapper";
 
 const navLinks = [
@@ -17,8 +18,9 @@ const navLinks = [
 
 export default function Header() {
   const pathname = usePathname();
+  const { mode } = useHeroVariant();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isDark = pathname === "/";
+  const isDark = pathname === "/" ? mode === "dark" : false;
 
   return (
     <div className={`border-b ${isDark ? "border-slate-600 bg-slate-800" : "border-slate-200 bg-slate-50"}`}>
